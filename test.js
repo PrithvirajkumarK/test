@@ -21,14 +21,14 @@ const createUser = ({ destination, accommodation, activities, notes, imageUrl, d
 
 function travelBooking() {
     console.log("Adding...");
-    const name = document.querySelector(".user-destination").value;
+    const destination = document.querySelector(".user-destination").value;
     const imageUrl = document.querySelector(".user-imageUrl").value;
     const activities = document.querySelector(".user-activities").value;
     const accommodation = document.querySelector(".user-accommodation").value;
     const notes = document.querySelector(".user-notes").value;
   
     const data = {
-      name,
+      destination,
       avatar: imageUrl,
       activities,
       accommodation,
