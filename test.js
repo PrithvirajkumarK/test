@@ -1,4 +1,31 @@
 const usersList = document.querySelector(".users-container");
+function travelBooking() {
+  console.log("Adding...");
+  const destination = document.querySelector(".user-destination").value;
+  const imageUrl = document.querySelector(".user-imageUrl").value;
+  const activities = document.querySelector(".user-activities").value;
+  const accommodation = document.querySelector(".user-accommodation").value;
+  const notes = document.querySelector(".user-notes").value;
+
+  const data = {
+    destination,
+    imageUrl,
+    activities,
+    accommodation,
+    notes
+  };
+  fetch("https://64f6f44c9d7754084952d964.mockapi.io/Travel", {
+          method: "POST",
+
+          body: JSON.stringify(data),
+
+          headers: {
+            "Content-type": "application/json",
+          },
+        }).then(() => getUsers());
+
+        console.log(destination, imageUrl);
+      }
 
 const createUser = ({ destination, accommodation, activities, notes, imageUrl, date, id }) => {
   usersList.innerHTML += `<div class="user">
@@ -19,22 +46,6 @@ const createUser = ({ destination, accommodation, activities, notes, imageUrl, d
       </div>`;
 };
 
-function travelBooking() {
-    console.log("Adding...");
-    const destination = document.querySelector(".user-destination").value;
-    const imageUrl = document.querySelector(".user-imageUrl").value;
-    const activities = document.querySelector(".user-activities").value;
-    const accommodation = document.querySelector(".user-accommodation").value;
-    const notes = document.querySelector(".user-notes").value;
-  
-    const data = {
-      destination,
-      avatar: imageUrl,
-      activities,
-      accommodation,
-      notes
-    };
-  }
 
 function deleteUser(id) {
   console.log("Deleting... User", id);
@@ -47,7 +58,7 @@ function deleteUser(id) {
 
 let pageNo=1;
 function getUsers() {
-  fetch(`https://64f6f44c9d7754084952d964.mockapi.io/Travel?page=${pageNo}&limit=10`, {
+  fetch(`https://64f6f44c9d7754084952d964.mockapi.io/Travel?page=${pageNo}&limit=5`, {
     method: "GET",
   })
     .then((res) => res.json())
@@ -84,7 +95,7 @@ const totalData=await  fetch("https://64f6f44c9d7754084952d964.mockapi.io/Travel
 const len = await totalData.json()
 
 const totalLength = len.length
-singlePageLength = Math.ceil(totalLength/10)
+singlePageLength = Math.ceil(totalLength/5)
 console.log(singlePageLength)
 createPagination()
 }
